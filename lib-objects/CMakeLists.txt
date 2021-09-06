@@ -19,12 +19,14 @@ set(BUILD_SHARED_LIBS ON)
 #-------------------------------------------------------------------------------
 set(SOURCES_FILES
   card.cpp
+  hand.cpp
 )
 
 #-------------------------------------------------------------------------------
 set(HEADERS_FILES
   include/blackjack_objects_global.hpp
   include/blackjack/card.h
+  include/blackjack/hand.h
 )
 
 #-------------------------------------------------------------------------------
