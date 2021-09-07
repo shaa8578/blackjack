@@ -54,6 +54,7 @@ change_output_dir(${tst_target})
 target_link_libraries(${tst_target} PRIVATE
   gtest gtest_main
 #  gmock gmock_main
+  blackjack-objects
 )
 
 target_compile_features(${tst_target} PRIVATE

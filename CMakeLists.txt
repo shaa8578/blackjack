@@ -25,46 +25,54 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 #-------------------------------------------------------------------------------
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin CACHE PATH
-  "Путь до исполняемых файлов сборки")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib CACHE PATH
-  "Путь до динамических библиотек")
+if(CMAKE_COMPILER_IS_GNUCXX)
+  set(CMAKE_EXE_LINKER_FLAGS "-Wl,-rpath,'$ORIGIN'/../lib,-rpath,'$ORIGIN'")
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin CACHE PATH
+    "Путь до исполняемых файлов сборки")
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib CACHE PATH
+    "Путь до динамических библиотек")
+else()
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin CACHE PATH
+    "Путь до исполняемых файлов сборки")
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin CACHE PATH
+    "Путь до динамических библиотек")
+endif()
 
 #-------------------------------------------------------------------------------
-set(SOURCES_FILES
-  main.cpp
-  card.cpp
-)
+macro(target_setup target)
+  target_compile_features(${target} PRIVATE
+    cxx_auto_type
+    cxx_generic_lambdas
+  )
 
-set(HEADERS_FILES
-  card.h
-)
+  target_compile_options(${target} PRIVATE
+    -Wall
+    -Wextra
+    -Wpedantic
+    -Wnonnull
+  #  -Wno-deprecated-copy
+  #  -save-temps
+  )
+endmacro()
+
+#-------------------------------------------------------------------------------
+add_subdirectory(lib-objects)
 
 set(app_target "blackjack")
 add_executable(${app_target} WIN32
-  ${SOURCES_FILES}
-  ${HEADERS_FILES}
+  src/main.cpp
 )
+target_setup(${app_target})
 
-target_compile_features(${app_target} PRIVATE
-  cxx_auto_type
-  cxx_generic_lambdas
-)
-
-target_compile_options(${app_target} PRIVATE
-  -Wall
-  -Wextra
-  -Wpedantic
-  -Wnonnull
-#  -Wno-deprecated-copy
-#  -save-temps
+target_link_libraries(${app_target} PRIVATE
+  blackjack-objects
 )
 
 target_compile_definitions(${app_target} PRIVATE
-  $<$<NOT:$<CONFIG:Debug>>:USING_SRAND>
   TARGET="${app_target}"
 )
 
+#-------------------------------------------------------------------------------
 if(DEFINED BUILD_TESTING AND BUILD_TESTING)
   add_subdirectory(tests)
 endif()
