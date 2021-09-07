@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <stdexcept>
 
 //------------------------------------------------------------------------------
 #if defined(_MSC_VER)

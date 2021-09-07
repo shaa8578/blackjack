@@ -1,7 +1,10 @@
 #pragma once
 
+#include "blackjack_objects_global.hpp"
+
+//------------------------------------------------------------------------------
 /** Описание карты в игре БлэкДжек */
-class Card {
+class LIB_BLACKJACK_SHARED Card {
  public:
   /** Масть карты */
   enum SuitType {

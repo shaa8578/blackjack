@@ -1,23 +1,21 @@
-#include "card.h"
-//
-#include <stdexcept>
+#include "blackjack/card.h"
 
 //------------------------------------------------------------------------------
-Card::Card(SuitType suit, ValueType value)
+LIB_BLACKJACK_SHARED Card::Card(SuitType suit, ValueType value)
     : m_suit(suit), m_value(value), m_opened(false) {}
 
 //------------------------------------------------------------------------------
-void Card::setOpened(bool value) {
+LIB_BLACKJACK_SHARED void Card::setOpened(bool value) {
   m_opened = value;
 }
 
 //------------------------------------------------------------------------------
-void Card::flip() {
+LIB_BLACKJACK_SHARED void Card::flip() {
   m_opened = !m_opened;
 }
 
 //------------------------------------------------------------------------------
-int Card::value() const {
+LIB_BLACKJACK_SHARED int Card::value() const {
   switch (m_value) {
     case ACE:
       return 1;
