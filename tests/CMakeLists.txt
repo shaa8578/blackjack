@@ -4,6 +4,7 @@ project(UNIT_TESTS VERSION 0.0.1 LANGUAGES CXX)
 
 #-------------------------------------------------------------------------------
 include(CTest)
+
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(BUILD_SHARED_LIBS OFF)
@@ -36,7 +37,7 @@ if(${GOOGLETEST_PATH} STREQUAL "GOOGLETEST_PATH-NOTFOUND")
   endif()
 endif()
 
-set(BUILD_GMOCK OFF)
+set(BUILD_GMOCK OFF CACHE BOOL "Сборка GMock")
 add_subdirectory(googletest)
 
 change_output_dir(gtest)
