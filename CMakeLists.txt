@@ -22,8 +22,13 @@ set(CMAKE_COLOR_MAKEFILE ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(BUILD_SHARED_LIBS ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+#-------------------------------------------------------------------------------
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin CACHE PATH
+  "Путь до исполняемых файлов сборки")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib CACHE PATH
+  "Путь до динамических библиотек")
 
 #-------------------------------------------------------------------------------
 set(SOURCES_FILES
@@ -60,3 +65,6 @@ target_compile_definitions(${app_target} PRIVATE
   TARGET="${app_target}"
 )
 
+if(DEFINED BUILD_TESTING AND BUILD_TESTING)
+  add_subdirectory(tests)
+endif()

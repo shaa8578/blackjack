@@ -31,3 +31,6 @@
 *.txt.user
 *.txt.user*
 *.autosave
+
+# repo googletest
+/tests/googletest/*
