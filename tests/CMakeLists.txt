@@ -50,6 +50,7 @@ add_executable(${tst_target} WIN32
   main_test.cpp
   tst_card.cpp
   tst_hand.cpp
+  tst_generic_player.cpp
 )
 change_output_dir(${tst_target})
 
