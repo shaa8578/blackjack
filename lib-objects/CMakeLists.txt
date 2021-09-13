@@ -22,6 +22,7 @@ set(SOURCES_FILES
   hand.cpp
   generic_player.cpp
   player.cpp
+  house.cpp
 )
 
 #-------------------------------------------------------------------------------
@@ -31,6 +32,7 @@ set(HEADERS_FILES
   include/blackjack/hand.h
   include/blackjack/generic_player.h
   include/blackjack/player.h
+  include/blackjack/house.h
 )
 
 #-------------------------------------------------------------------------------
