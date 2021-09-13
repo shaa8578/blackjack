@@ -17,7 +17,16 @@ class LIB_BLACKJACK_SHARED GenericPlayer : public Hand {
   bool isBoosted() const;
 
   std::string bust() const;
+  std::string toString() const;
 
  private:
   std::string m_name;
 };
+
+//------------------------------------------------------------------------------
+template <typename _CharT, typename _Traits>
+inline std::basic_ostream<_CharT, _Traits>& operator<<(
+    std::basic_ostream<_CharT, _Traits>& os, const GenericPlayer& gp) {
+  os << gp.toString();
+  return os;
+}
