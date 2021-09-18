@@ -28,9 +28,11 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 #-------------------------------------------------------------------------------
 set(SOURCES_FILES
   main.cpp
+  card.cpp
 )
 
 set(HEADERS_FILES
+  card.h
 )
 
 set(app_target "blackjack")
