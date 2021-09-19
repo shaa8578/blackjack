@@ -3,8 +3,8 @@
 #include <assert.h>
 
 //------------------------------------------------------------------------------
-LIB_BLACKJACK_SHARED Card::Card(SuitType suit, ValueType value)
-    : m_suit(suit), m_value(value), m_opened(false) {}
+LIB_BLACKJACK_SHARED Card::Card(SuitType suit, RankType value)
+    : m_suit(suit), m_rank(value), m_opened(false) {}
 
 //------------------------------------------------------------------------------
 LIB_BLACKJACK_SHARED Card::~Card() {}
@@ -12,7 +12,7 @@ LIB_BLACKJACK_SHARED Card::~Card() {}
 //------------------------------------------------------------------------------
 LIB_BLACKJACK_SHARED
 std::shared_ptr<Card> Card::createInstance(Card::SuitType suit,
-                                           Card::ValueType value) {
+                                           Card::RankType value) {
   return std::make_shared<Card>(suit, value);
 }
 
@@ -28,12 +28,12 @@ LIB_BLACKJACK_SHARED void Card::flip() {
 
 //------------------------------------------------------------------------------
 LIB_BLACKJACK_SHARED bool Card::isAce() const {
-  return m_value == ACE;
+  return m_rank == ACE;
 }
 
 //------------------------------------------------------------------------------
 LIB_BLACKJACK_SHARED bool Card::isRankCard() const {
-  switch (m_value) {
+  switch (m_rank) {
     case KING:
     case QUEEN:
     case JACK:
@@ -46,7 +46,7 @@ LIB_BLACKJACK_SHARED bool Card::isRankCard() const {
 
 //------------------------------------------------------------------------------
 LIB_BLACKJACK_SHARED int Card::value() const {
-  switch (m_value) {
+  switch (m_rank) {
     case ACE:
       return 1;
     case KING:
@@ -101,7 +101,7 @@ std::string Card::suit2String() const {
 
 //------------------------------------------------------------------------------
 std::string Card::value2String() const {
-  switch (m_value) {
+  switch (m_rank) {
     case ACE:
       return "A";
     case KING:
