@@ -22,6 +22,7 @@ class LIB_BLACKJACK_SHARED Hand {
 
  protected:
   const CardArray& cards() const;
+  CardArray& cards();
 
  private:
   /** Вектор указателей на карты */

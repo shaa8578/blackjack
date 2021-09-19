@@ -14,7 +14,7 @@ class LIB_BLACKJACK_SHARED GenericPlayer : public Hand {
   std::string name() const;
 
   virtual bool isHitting() = 0;
-  bool isBoosted() const;
+  virtual bool isBoosted() const;
 
   std::string bust() const;
   std::string toString() const;

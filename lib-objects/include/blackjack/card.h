@@ -51,6 +51,12 @@ class LIB_BLACKJACK_SHARED Card {
 
   std::string toString() const;
 
+  bool operator==(const Card& rhs) {
+    return (this->m_suit == rhs.m_suit) && (this->m_rank == rhs.m_rank);
+  }
+
+  bool operator!=(const Card& rhs) { return !(*this == rhs); }
+
  protected:
   std::string suit2String() const;
   std::string value2String() const;
@@ -67,4 +73,10 @@ inline std::basic_ostream<_CharT, _Traits>& operator<<(
     std::basic_ostream<_CharT, _Traits>& os, const Card& card) {
   os << card.toString();
   return os;
+}
+
+//------------------------------------------------------------------------------
+inline bool operator==(const std::shared_ptr<Card>& lhs,
+                       const std::shared_ptr<Card>& rhs) {
+  return *lhs == *rhs;
 }

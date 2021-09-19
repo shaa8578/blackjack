@@ -7,34 +7,34 @@
 #include "blackjack/generic_player.h"
 
 //------------------------------------------------------------------------------
-class FakeGenericPlayer : public GenericPlayer {
+class ImplGenericPlayer : public GenericPlayer {
  public:
   static const char* PLAYER_NAME;
-  explicit FakeGenericPlayer(const std::string& _name)
+  explicit ImplGenericPlayer(const std::string& _name)
       : GenericPlayer(_name, /*MAXIMUM_CARD_COUNT =*/10) {}
 
   const CardArray& cards() const { return GenericPlayer::cards(); }
 
   virtual bool isHitting() { return false; }
 };
-const char* FakeGenericPlayer::PLAYER_NAME = "player";
+const char* ImplGenericPlayer::PLAYER_NAME = "player";
 
 //------------------------------------------------------------------------------
 class TestGenericPlayer : public ::testing::Test {
  protected:
   void SetUp() override {
     player =
-        std::make_unique<FakeGenericPlayer>(FakeGenericPlayer::PLAYER_NAME);
+        std::make_unique<ImplGenericPlayer>(ImplGenericPlayer::PLAYER_NAME);
   }
   void TearDown() override { player.reset(nullptr); }
 
-  std::unique_ptr<FakeGenericPlayer> player;
+  std::unique_ptr<ImplGenericPlayer> player;
 };
 
 //------------------------------------------------------------------------------
 TEST_F(TestGenericPlayer, name) {
   auto player_name = player->name();
-  ASSERT_STREQ(player_name.c_str(), FakeGenericPlayer::PLAYER_NAME);
+  ASSERT_STREQ(player_name.c_str(), ImplGenericPlayer::PLAYER_NAME);
 }
 
 //------------------------------------------------------------------------------

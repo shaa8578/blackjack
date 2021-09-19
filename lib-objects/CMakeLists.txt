@@ -23,6 +23,7 @@ set(SOURCES_FILES
   generic_player.cpp
   player.cpp
   house.cpp
+  deck.cpp
 )
 
 #-------------------------------------------------------------------------------
@@ -33,6 +34,7 @@ set(HEADERS_FILES
   include/blackjack/generic_player.h
   include/blackjack/player.h
   include/blackjack/house.h
+  include/blackjack/deck.h
 )
 
 #-------------------------------------------------------------------------------
