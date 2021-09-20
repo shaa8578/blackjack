@@ -49,6 +49,7 @@ set(tst_target "tst-blackjack-objects")
 add_executable(${tst_target} WIN32
   main_test.cpp
   tst_card.cpp
+  tst_hand.cpp
 )
 change_output_dir(${tst_target})
 

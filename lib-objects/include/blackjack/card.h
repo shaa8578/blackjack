@@ -32,6 +32,9 @@ class LIB_BLACKJACK_SHARED Card {
   };
 
   Card(SuitType suit, ValueType value);
+  ~Card();
+
+  static std::shared_ptr<Card> createInstance(SuitType suit, ValueType value);
 
   SuitType suit() const { return m_suit; }
 
@@ -39,6 +42,8 @@ class LIB_BLACKJACK_SHARED Card {
   void setOpened(bool value);
 
   void flip();
+  bool isAce() const;
+  bool isRankCard() const;
   int value() const;
 
  private:
