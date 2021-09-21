@@ -62,6 +62,8 @@ add_subdirectory(lib-objects)
 set(app_target "blackjack")
 add_executable(${app_target} WIN32
   src/main.cpp
+  src/game.cpp
+  src/game.h
 )
 target_setup(${app_target})
 
@@ -71,6 +73,7 @@ target_link_libraries(${app_target} PRIVATE
 
 target_compile_definitions(${app_target} PRIVATE
   TARGET="${app_target}"
+  $<$<NOT:$<CONFIG:Debug>>:USING_SRAND>
 )
 
 #-------------------------------------------------------------------------------

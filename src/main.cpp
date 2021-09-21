@@ -70,7 +70,7 @@ int main(int argc, char** argv) {
   }
 
 #if defined(USING_SRAND)
-  srand(time(0));
+  srand(static_cast<unsigned int>(time(0)));
 #endif /* USING_SRAND */
 
   /* Точка запуска программы */

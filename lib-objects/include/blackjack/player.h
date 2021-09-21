@@ -5,6 +5,10 @@
 #include "blackjack/generic_player.h"
 
 //------------------------------------------------------------------------------
+class Player;
+using PtrPlayer = std::shared_ptr<Player>;
+
+//------------------------------------------------------------------------------
 /** Обобщённое представление игрока */
 class LIB_BLACKJACK_SHARED Player : public GenericPlayer {
  public:
@@ -16,4 +20,7 @@ class LIB_BLACKJACK_SHARED Player : public GenericPlayer {
   std::string win() const;
   std::string lose() const;
   std::string push() const;
+
+  static PtrPlayer createInstance(const std::string& _name,
+                                  const size_t MAXIMUM_CARD_COUNT);
 };

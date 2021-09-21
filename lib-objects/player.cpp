@@ -46,3 +46,9 @@ LIB_BLACKJACK_SHARED std::string Player::lose() const {
 LIB_BLACKJACK_SHARED std::string Player::push() const {
   return name() + std::string(" сыграл вничью!");
 }
+
+//------------------------------------------------------------------------------
+LIB_BLACKJACK_SHARED PtrPlayer Player::createInstance(
+    const std::string& _name, const size_t MAXIMUM_CARD_COUNT) {
+  return std::make_shared<Player>(_name, MAXIMUM_CARD_COUNT);
+}
