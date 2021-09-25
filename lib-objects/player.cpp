@@ -17,7 +17,7 @@ LIB_BLACKJACK_SHARED Player::~Player() {}
 LIB_BLACKJACK_SHARED bool Player::isHitting() {
   char user_answer(0);
   while (true) {
-    std::cout << "Нужна ещё одна карта (y/n)? " << std::ends;
+    std::cout << name() << ", нужна ещё одна карта (y/n)? " << std::ends;
     std::cin >> user_answer;
     if (std::cin.fail()) {
       std::cin.clear();
