@@ -53,6 +53,13 @@ TEST(TestCard, isRankCard) {
 }
 
 //------------------------------------------------------------------------------
+TEST(TestCard, isRankCard_not_opened) {
+  Card card(Card::DIAMONDS, Card::KING);
+  card.flip();
+  ASSERT_FALSE(card.isRankCard());
+}
+
+//------------------------------------------------------------------------------
 #define TEST_CARD_VALUE(TYPE, EXPECTED)               \
   {                                                   \
     Card card(Card::CLUBS, TYPE);                     \

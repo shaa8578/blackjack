@@ -73,3 +73,23 @@ TEST_F(TestHand, value_two_ace_and_rankcard) {
 
   ASSERT_EQ(hand->value(), 32);
 }
+
+//------------------------------------------------------------------------------
+TEST_F(TestHand, value_flip_first_card) {
+  auto first_card(Card::createInstance(Card::DIAMONDS, Card::KING));
+  first_card->flip();
+  hand->add(first_card);
+  hand->add(Card::createInstance(Card::DIAMONDS, Card::SIX));
+
+  ASSERT_EQ(hand->value(), 6);
+}
+
+//------------------------------------------------------------------------------
+TEST_F(TestHand, value_ace_and_flip_first_card) {
+  auto first_card(Card::createInstance(Card::DIAMONDS, Card::KING));
+  first_card->flip();
+  hand->add(first_card);
+  hand->add(Card::createInstance(Card::DIAMONDS, Card::ACE));
+
+  ASSERT_EQ(hand->value(), 1);
+}

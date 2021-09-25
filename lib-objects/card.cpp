@@ -33,13 +33,15 @@ LIB_BLACKJACK_SHARED bool Card::isAce() const {
 
 //------------------------------------------------------------------------------
 LIB_BLACKJACK_SHARED bool Card::isRankCard() const {
-  switch (m_rank) {
-    case KING:
-    case QUEEN:
-    case JACK:
-      return true;
-    default:
-      break;
+  if (m_opened) {
+    switch (m_rank) {
+      case KING:
+      case QUEEN:
+      case JACK:
+        return true;
+      default:
+        break;
+    }
   }
   return false;
 }
