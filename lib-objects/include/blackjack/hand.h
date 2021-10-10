@@ -14,7 +14,7 @@ using CardArray = std::vector<PtrCard>;
 class LIB_BLACKJACK_SHARED Hand {
  public:
   explicit Hand(const size_t MAXIMUM_CARD_COUNT);
-  ~Hand();
+  virtual ~Hand();
 
   void add(PtrCard card);
   void clear();
