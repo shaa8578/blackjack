@@ -37,11 +37,12 @@ if(${GOOGLETEST_PATH} STREQUAL "GOOGLETEST_PATH-NOTFOUND")
   endif()
 endif()
 
-set(BUILD_GMOCK OFF CACHE BOOL "Сборка GMock")
 add_subdirectory(googletest)
 
 change_output_dir(gtest)
 change_output_dir(gtest_main)
+change_output_dir(gmock)
+change_output_dir(gmock_main)
 
 #-------------------------------------------------------------------------------
 set(tst_target "tst-blackjack-objects")
@@ -53,12 +54,13 @@ add_executable(${tst_target} WIN32
   tst_generic_player.cpp
   tst_player.cpp
   tst_house.cpp
+  tst_deck.cpp
 )
 change_output_dir(${tst_target})
 
 target_link_libraries(${tst_target} PRIVATE
   gtest gtest_main
-#  gmock gmock_main
+  gmock gmock_main
   blackjack-objects
 )
 
