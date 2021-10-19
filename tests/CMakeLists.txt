@@ -51,6 +51,7 @@ add_executable(${tst_target} WIN32
   tst_card.cpp
   tst_hand.cpp
   tst_generic_player.cpp
+  tst_player.cpp
 )
 change_output_dir(${tst_target})
 

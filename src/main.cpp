@@ -4,6 +4,8 @@
 #include <cstdlib>
 #include <iostream>
 
+#include "blackjack/player.h"
+
 #if defined(USING_SRAND)
 #include <ctime>
 #endif /* USING_SRAND */
@@ -72,6 +74,8 @@ int main(int argc, char** argv) {
 #endif /* USING_SRAND */
 
   /* Точка запуска программы */
+  Player p("user", 10);
+  std::cout << std::boolalpha << p.isHitting() << std::endl;
 
   return EXIT_SUCCESS;
 }
