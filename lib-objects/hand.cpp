@@ -42,3 +42,8 @@ LIB_BLACKJACK_SHARED int Hand::value() const {
   }
   return result;
 }
+
+//------------------------------------------------------------------------------
+LIB_BLACKJACK_SHARED const CardArray Hand::cards() const {
+  return m_cards;
+}

@@ -52,6 +52,7 @@ add_executable(${tst_target} WIN32
   tst_hand.cpp
   tst_generic_player.cpp
   tst_player.cpp
+  tst_house.cpp
 )
 change_output_dir(${tst_target})
 
