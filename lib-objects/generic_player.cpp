@@ -1,6 +1,9 @@
 #include "blackjack/generic_player.h"
 
+#include <blackjack/card.h>
 #include <string.h>
+
+#include <sstream>
 
 //------------------------------------------------------------------------------
 LIB_BLACKJACK_SHARED
@@ -26,4 +29,20 @@ LIB_BLACKJACK_SHARED bool GenericPlayer::isBoosted() const {
 //------------------------------------------------------------------------------
 LIB_BLACKJACK_SHARED std::string GenericPlayer::bust() const {
   return m_name + std::string(" - перебор!");
+}
+
+//------------------------------------------------------------------------------
+LIB_BLACKJACK_SHARED std::string GenericPlayer::toString() const {
+  std::stringstream ss;
+  ss << m_name << std::string(": ");
+  const auto& cards(this->cards());
+  if (cards.empty()) {
+    ss << "<empty>";
+  } else {
+    for (const auto& card : cards) {
+      ss << *card << " ";
+    }
+    ss << "(" << this->value() << ")";
+  }
+  return ss.str();
 }

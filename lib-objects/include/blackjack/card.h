@@ -46,8 +46,22 @@ class LIB_BLACKJACK_SHARED Card {
   bool isRankCard() const;
   int value() const;
 
+  std::string toString() const;
+
+ protected:
+  std::string suit2String() const;
+  std::string value2String() const;
+
  private:
   SuitType m_suit;
   ValueType m_value;
   bool m_opened;
 };
+
+//------------------------------------------------------------------------------
+template <typename _CharT, typename _Traits>
+inline std::basic_ostream<_CharT, _Traits>& operator<<(
+    std::basic_ostream<_CharT, _Traits>& os, const Card& card) {
+  os << card.toString();
+  return os;
+}
