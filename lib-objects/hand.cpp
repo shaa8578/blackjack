@@ -31,7 +31,7 @@ LIB_BLACKJACK_SHARED int Hand::value() const {
       [&ace_count, &has_cards_with_rank](int init, const PtrCard& card) -> int {
         ace_count += static_cast<int>(card->isAce());
         has_cards_with_rank |= card->isRankCard();
-        return init + card->value();
+        return init + (card->isOpened() ? card->value() : 0);
       }));
   if (has_cards_with_rank && (ace_count > 0)) {
     /** Количество очков, добавляемое тузу при наличии старших карт

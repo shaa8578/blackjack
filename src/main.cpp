@@ -1,10 +1,16 @@
 #include <getopt.h>
+#include <string.h>
 
 #include <clocale>
 #include <cstdlib>
 #include <iostream>
+#include <iterator>
+#include <limits>
+#include <sstream>
+#include <vector>
 
 #include "blackjack/player.h"
+#include "game.h"
 
 #if defined(USING_SRAND)
 #include <ctime>
@@ -34,12 +40,55 @@ static const char* const SHORT_OPTIONS = "h";
 
 //------------------------------------------------------------------------------
 /* Сообщение о том, как правильно использовать программу. */
-static void printUsage(bool isError) {
+void printUsage(bool isError) {
   static const char* const usage_template =
       "Использование: %s { ОПЦИИ }\n"
       " -h, --help    Вывести текущую информацию.\n"
       "\n";
   fprintf(isError ? stderr : stdout, usage_template, TARGET);
+}
+
+//------------------------------------------------------------------------------
+StringList splitString(const std::string& text) {
+  std::istringstream iss(text);
+  std::vector<std::string> result(std::istream_iterator<std::string>{iss},
+                                  std::istream_iterator<std::string>());
+  return result;
+}
+
+//------------------------------------------------------------------------------
+void clearCinStream() {
+  std::cin.clear();
+  std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
+//------------------------------------------------------------------------------
+StringList promtPlayerNames() {
+  clearCinStream();
+
+  std::cout << "Введите через пробел имена игроков: ";
+  std::string player_names_str;
+  std::getline(std::cin, player_names_str, '\n');
+
+  return splitString(player_names_str);
+}
+
+//------------------------------------------------------------------------------
+bool promtPlayAgain() {
+  char user_answer(0);
+  while (true) {
+    std::cout << "Повторить игру (y/n)? " << std::ends;
+    std::cin >> user_answer;
+    if (std::cin.fail()) {
+      clearCinStream();
+    } else {
+      if (user_answer == 'y' || user_answer == 'n') {
+        break;
+      }
+    }
+    std::cerr << "Необходимо ввести символы 'y', или 'n'" << std::endl;
+  }
+  return (user_answer == 'y');
 }
 
 //------------------------------------------------------------------------------
@@ -73,9 +122,19 @@ int main(int argc, char** argv) {
   srand(static_cast<unsigned int>(time(0)));
 #endif /* USING_SRAND */
 
-  /* Точка запуска программы */
-  Player p("user", 10);
-  std::cout << std::boolalpha << p.isHitting() << std::endl;
+  std::cout << "Для начала игры введите Enter";
+
+  do {
+    auto player_names = promtPlayerNames();
+
+    Game game;
+    game.init(player_names);
+
+    game.play();
+
+    if (promtPlayAgain() == false) break;
+
+  } while (true);
 
   return EXIT_SUCCESS;
 }
