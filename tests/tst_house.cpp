@@ -36,6 +36,6 @@ TEST_F(TestHouse, flipFirstCard) {
 
   house->flipFirstCard();
 
-  ASSERT_TRUE(first_card->isOpened());
-  ASSERT_FALSE(second_card->isOpened());
+  ASSERT_FALSE(first_card->isOpened());
+  ASSERT_TRUE(second_card->isOpened());
 }

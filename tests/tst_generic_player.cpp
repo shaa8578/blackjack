@@ -64,9 +64,6 @@ TEST_F(TestGenericPlayer, toString) {
   player->add(Card::createInstance(Card::DIAMONDS, Card::KING));
   player->add(Card::createInstance(Card::CLUBS, Card::TEN));
 
-  const auto& cards_array(player->cards());
-  std::for_each(cards_array.begin(), cards_array.end(),
-                [](const PtrCard& card) -> void { card->flip(); });
   auto actual_text(player->toString());
   ASSERT_STREQ(actual_text.c_str(), "player: Kd 10c (20)");
 }
@@ -75,9 +72,6 @@ TEST_F(TestGenericPlayer, toString) {
 TEST_F(TestGenericPlayer, output) {
   player->add(Card::createInstance(Card::DIAMONDS, Card::KING));
   player->add(Card::createInstance(Card::CLUBS, Card::TEN));
-  const auto& cards_array(player->cards());
-  std::for_each(cards_array.begin(), cards_array.end(),
-                [](const PtrCard& card) -> void { card->flip(); });
 
   std::stringstream ss;
   ss << *player;

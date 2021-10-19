@@ -4,7 +4,7 @@
 
 //------------------------------------------------------------------------------
 LIB_BLACKJACK_SHARED Card::Card(SuitType suit, RankType value)
-    : m_suit(suit), m_rank(value), m_opened(false) {}
+    : m_suit(suit), m_rank(value), m_opened(true) {}
 
 //------------------------------------------------------------------------------
 LIB_BLACKJACK_SHARED Card::~Card() {}

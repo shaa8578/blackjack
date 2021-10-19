@@ -11,7 +11,7 @@
     ASSERT_FALSE(card.isAce());      \
   }
 
-TEST(Test_Card, isAce) {
+TEST(TestCard, isAce) {
   {
     Card card(Card::DIAMONDS, Card::ACE);
     ASSERT_TRUE(card.isAce());
@@ -40,7 +40,7 @@ TEST(Test_Card, isAce) {
     ASSERT_FALSE(card.isRankCard());     \
   }
 
-TEST(Test_Card, isRankCard) {
+TEST(TestCard, isRankCard) {
   TEST_CARD_IS_RANK_CARD(Card::KING);
   TEST_CARD_IS_RANK_CARD(Card::QUEEN);
   TEST_CARD_IS_RANK_CARD(Card::JACK);
@@ -53,13 +53,14 @@ TEST(Test_Card, isRankCard) {
 }
 
 //------------------------------------------------------------------------------
-#define TEST_CARD_VALUE(TYPE, EXPECTED) \
-  {                                     \
-    Card card(Card::CLUBS, TYPE);       \
-    ASSERT_EQ(card.value(), EXPECTED);  \
+#define TEST_CARD_VALUE(TYPE, EXPECTED)               \
+  {                                                   \
+    Card card(Card::CLUBS, TYPE);                     \
+    const int expected_value = EXPECTED;              \
+    ASSERT_EQ(card.value(), expected_value) << #TYPE; \
   }
 
-TEST(Test_Card, value) {
+TEST(TestCard, value) {
   TEST_CARD_VALUE(Card::ACE, 1);
   TEST_CARD_VALUE(Card::KING, 10);
   TEST_CARD_VALUE(Card::QUEEN, 10);
@@ -76,19 +77,21 @@ TEST(Test_Card, value) {
 }
 
 //------------------------------------------------------------------------------
-#define TEST_CARD_TOSTRING(SUIT, RANK, EXPECTED)            \
-  {                                                         \
-    Card card(Card::SUIT, Card::RANK);                      \
-    card.flip();                                            \
-    auto actual_##SUIT##_##RANK(card.toString());           \
-    ASSERT_STREQ(actual_##SUIT##_##RANK.c_str(), EXPECTED); \
+#define TEST_CARD_TOSTRING(SUIT, RANK, EXPECTED)                           \
+  {                                                                        \
+    Card card(Card::SUIT, Card::RANK);                                     \
+    auto actual_##SUIT##_##RANK(card.toString());                          \
+    const char* expected_##SUIT##_##RANK = EXPECTED;                       \
+    ASSERT_STREQ(actual_##SUIT##_##RANK.c_str(), expected_##SUIT##_##RANK) \
+        << #SUIT "_" #RANK;                                                \
   }
 
-TEST(Test_Card, toString) {
+TEST(TestCard, toString) {
   {
     Card card(Card::DIAMONDS, Card::ACE);
+    card.flip();
     auto actual_not_opend(card.toString());
-    ASSERT_STREQ(actual_not_opend.c_str(), "XX");
+    ASSERT_STREQ(actual_not_opend.c_str(), "XX") << "XX";
   }
   TEST_CARD_TOSTRING(DIAMONDS, ACE, "Ad");
   TEST_CARD_TOSTRING(CLUBS, KING, "Kc");
@@ -106,9 +109,8 @@ TEST(Test_Card, toString) {
 }
 
 //------------------------------------------------------------------------------
-TEST(Test_Card, operator_output) {
+TEST(TestCard, operator_output) {
   Card card(Card::DIAMONDS, Card::ACE);
-  card.flip();
 
   std::stringstream ss;
   ss << card;
